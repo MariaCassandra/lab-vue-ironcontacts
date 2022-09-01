@@ -39,17 +39,17 @@ const firstFiveContacts = reactive(myContacts.slice(0, 5));
 const otherContacts = reactive(firstFiveContacts.slice(5));
 
 function addRandomActor() {
-  const randomNumber = Math.floor(Math.random() * this.otherContacts.length);
-  this.firstFiveContacts.push(otherContacts[randomNumber]);
-  this.otherContacts.splice(randomNumber, 1);
+  const randomNumber = Math.floor(Math.random() * otherContacts.length);
+  firstFiveContacts.push(otherContacts[randomNumber]);
+  otherContacts.splice(randomNumber, 1);
 }
 
 function sortByPopularity() {
-  this.firstFiveContacts.sort((a, b) => (a.popularity < b.popularity ? 1 : -1));
+  firstFiveContacts.sort((a, b) => (a.popularity < b.popularity ? 1 : -1));
 }
 
 function sortByName() {
-  this.firstFiveContacts.sort((a, b) => (a.name > b.name ? 1 : -1));
+  firstFiveContacts.sort((a, b) => (a.name > b.name ? 1 : -1));
 }
 
 function deleteContact(contact) {
@@ -84,5 +84,14 @@ img {
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
