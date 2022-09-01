@@ -1,6 +1,11 @@
 <template>
   <div id="app">
   <h1>IronContacts</h1>
+  <div  class="sortingButtons">
+  <button @click="addRandomActor">Add Random Contact</button>
+  <button @click="sortByPopularity">Sort by popularity</button>
+  <button @click="sortByName">Sort by name</button>
+  </div>
   <table>
     <thead>
         <tr>
@@ -18,6 +23,7 @@
           <td>{{ contact.popularity.toFixed(2) }}</td>
           <td>{{ contact.wonOscar ? "🏆" : ""}}</td>
           <td>{{ contact.wonEmmy ? "🏆" : ""}}</td>
+          <td><button @click="deleteContact">Delete </button></td>
         </tr>
     </tbody>
   </table>
@@ -26,11 +32,17 @@
 
 <script setup>
 import contacts from './contacts.json'
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 
 const myContacts = reactive(contacts);
 const firstFiveContacts = reactive(myContacts.slice(0, 5));
 const otherContacts = reactive(firstFiveContacts.slice(5));
+
+function addRandomActor() {
+const randomNumber = Math.floor(Math.random() * this.otherContacts.length);
+this.firstFiveContacts.push(otherContacts[randomNumber]);
+this.otherContacts.splice(randomNumber, 1);
+};
 </script>
 
 <style>
@@ -40,10 +52,24 @@ const otherContacts = reactive(firstFiveContacts.slice(5));
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  text-align: center;
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 img {
   width: 100px;
+}
+
+.sortingButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 </style>
