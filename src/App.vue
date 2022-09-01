@@ -11,11 +11,9 @@
     </thead>
     <tbody>
         <tr v-for="contact in firstFiveContacts" :key="contact.id">
-          <td>
-            <img :src="contact.pictureUrl">
-          </td>
+          <td><img :src="contact.pictureUrl"></td>
           <td>{{ contact.name }}</td>
-          <td>{{ contact.popularity }}</td>
+          <td>{{ contact.popularity.toFixed(2) }}</td>
         </tr>
     </tbody>
   </table>
@@ -29,10 +27,6 @@ import { ref, reactive } from 'vue'
 const myContacts = reactive(contacts);
 const firstFiveContacts = reactive(myContacts.slice(0, 5));
 const otherContacts = reactive(firstFiveContacts.slice(5));
-
-export default {
-  name: 'App',
-}
 </script>
 
 <style>
